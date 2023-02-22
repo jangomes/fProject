@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<section class="section-content padding-y bg">
+<div class="container">
+
+<!-- ============================ COMPONENT 1 ================================= -->
+<div class="card">
+	<div class="row no-gutters">
+		<aside class="col-md-6">
+<article class="gallery-wrap">
+	<div class="img-big-wrap">
+	   <a href="#"><img src="{{ single_product.images.url }}"></a>
+	</div> <!-- img-big-wrap.// -->
+
+</article> <!-- gallery-wrap .end// -->
+		</aside>
+		<main class="col-md-6 border-left">
+<article class="content-body">
+
+<h2 class="title">{{ single_product.product_name }}</h2>
+
+
+<p>{{ single_product.description }}</p>
+
+	<hr>
+
+
+			<a href="./product-detail.html" class="btn  btn-primary"> <span class="text">Add to favorite</span> <i class="fas fa-solid fa-heart"></i>  </a>
+
+</article> <!-- product-info-aside .// -->
+		</main> <!-- col.// -->
+	</div> <!-- row.// -->
+</div> <!-- card.// -->
+<!-- ============================ COMPONENT 1 END .// ================================= -->
+
+</section>
+<!-- ========================= SECTION CONTENT END// ========================= -->
+
+{% endblock %}

@@ -1,0 +1,78 @@
+{% extends 'base.html'%}
+{% load static %}
+{% block content %}
+<section class="section-content padding-y bg">
+<div class="container">
+
+<!-- ============================ COMPONENT 1 ================================= -->
+{% if not favorite_items %}
+	<h2 class="text-center" >You have no favorite items</h2>
+	<br>
+	<div class="text-center">
+		<a href="{% url 'store' %}" class="btn btn-primary">Back to Store</a>
+	</div>
+
+{% else %}
+
+<div class="row">
+	<aside class="col-lg-9">
+<div class="card">
+<table class="table table-borderless table-shopping-cart">
+<thead class="text-muted">
+
+<tr class="small text-uppercase">
+  <th scope="col">Product</th>
+  <th scope="col" width="120">Quantity</th>
+  <th scope="col" class="text-right" width="200"> </th>
+</tr>
+</thead>
+<tbody>
+
+{% for favorite_item in favorite_items %}
+<tr>
+	<td>
+		<figure class="itemside align-items-center">
+			<div class="aside"><img src="{{ favorite_item.product.images.url }}" class="img-sm"></div>
+			<figcaption class="info">
+				<a href="{{ favorite_item.product.get_url }}" class="title text-dark">{{ favorite_item.product.product_name }}</a>
+				<p class="text-muted small">Matrix: 25 Mpx <br> Brand: Canon</p>
+			</figcaption>
+		</figure>
+	</td>
+	<td>
+		<!-- col.// -->
+					<div class="col">
+						<div class="input-group input-spinner">
+							<div class="input-group-prepend">
+							<a href="{% url 'remove_favorite' favorite_item.product.id %}" class="btn btn-light" type="button" id="button-plus"> <i class="fa fa-minus"></i> </a>
+							</div>
+							<input type="text" class="form-control"  value="{{ favorite_item.quantity }}">
+							<div class="input-group-append">
+							<a href="{% url 'add_favorite' favorite_item.product.id %}" class="btn btn-light" type="button" id="button-minus"> <i class="fa fa-plus"></i> </a>
+							</div>
+						</div> <!-- input-group.// -->
+					</div> <!-- col.// -->
+	</td>
+
+	<td class="text-right">
+	<a href="{% url 'remove_favorite_item' favorite_item.product.id %}" class="btn btn-danger"> Remove</a>
+	</td>
+</tr>
+{% endfor %}
+
+
+</tbody>
+</table>
+</div> <!-- card.// -->
+
+	</aside> <!-- col.// -->
+
+
+</div> <!-- row.// -->
+{% endif %}
+<!-- ============================ COMPONENT 1 END .// ================================= -->
+
+</div> <!-- container .//  -->
+</section>
+<!-- ========================= SECTION CONTENT END// ========================= -->
+{% endblock %}

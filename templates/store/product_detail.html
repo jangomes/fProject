@@ -1,3 +1,10 @@
+
+<!--This is a Django template that extends a base template and overrides the content block. The
+content block includes HTML code for displaying a product, including its name, description,
+and an option to add it to the user's favorites if it's in stock. The template uses Django
+template language to check if the product is in stock and if it's already in the user's favorites. -->
+
+
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
@@ -24,10 +31,16 @@
 <p>{{ single_product.description }}</p>
 
 	<hr>
-
-
-			<a href="./product-detail.html" class="btn  btn-primary"> <span class="text">Add to favorite</span> <i class="fas fa-solid fa-heart"></i>  </a>
-
+	{% if single_product.quantity <= 0 %}
+	 	 <h5 class="text-danger">Sorry the product is gone already </h5>
+		 {% else %}
+		 	{% if in_favorite %}
+				<a href="#" class="btn  btn-success"> <span class="text">Added to Favorite</span> <i class="fas fa-check"></i>  </a>
+				<a href="{% url 'favorite' %}" class="btn  btn-outline-primary"> <span class="text">View favorite</span> <i class="fas fa-eye"></i>  </a>
+			{% else %}
+			<a href="{% url 'add_favorite' single_product.id %}" class="btn  btn-primary"> <span class="text">Add to favorite</span> <i class="fas fa-solid fa-heart"></i>  </a>
+			{% endif %}
+	{% endif %}
 </article> <!-- product-info-aside .// -->
 		</main> <!-- col.// -->
 	</div> <!-- row.// -->

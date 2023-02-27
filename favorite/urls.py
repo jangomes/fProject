@@ -6,4 +6,6 @@ urlpatterns = [
     path('add_favorite/<int:product_id>/', views.add_favorite, name='add_favorite'),
     path('remove_favorite/<int:product_id>/', views.remove_favorite, name='remove_favorite'),
     path('remove_favorite_item/<int:product_id>/', views.remove_favorite_item, name='remove_favorite_item'),
+
+    path('senddetails', views.senddetails, name='senddetails'),
 ]

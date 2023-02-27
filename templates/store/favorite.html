@@ -35,7 +35,6 @@
 			<div class="aside"><img src="{{ favorite_item.product.images.url }}" class="img-sm"></div>
 			<figcaption class="info">
 				<a href="{{ favorite_item.product.get_url }}" class="title text-dark">{{ favorite_item.product.product_name }}</a>
-				<p class="text-muted small">Matrix: 25 Mpx <br> Brand: Canon</p>
 			</figcaption>
 		</figure>
 	</td>
@@ -65,7 +64,20 @@
 </table>
 </div> <!-- card.// -->
 
-	</aside> <!-- col.// -->
+
+</aside> <!-- col.// -->
+
+<aside class="col-lg-3">
+
+	<div class="card">
+	<div class="card-body">
+		<a href="{% url 'senddetails' %}" class="btn btn-primary btn-block">Contact</a>
+		<a href="{% url 'store' %}" class="btn btn-light btn-block">Back to Store</a>
+	</div> <!-- card-body.// -->
+	</div> <!-- card.// -->
+
+</aside> <!-- col.// -->
+
 
 
 </div> <!-- row.// -->

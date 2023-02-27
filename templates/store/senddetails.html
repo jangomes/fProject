@@ -1,0 +1,105 @@
+{% extends 'base.html'%}
+{% load static %}
+{% block content %}
+<section class="section-content padding-y bg">
+<div class="container">
+
+<!-- ============================ COMPONENT 1 ================================= -->
+
+
+<div class="row">
+	<aside class="col-lg-6">
+<div class="card">
+  <div class="card-body">
+    <h4 class="card-title mb-4">Details</h4>
+
+    <form action="">
+
+<!-- First row start -->
+        <div class="form-row">
+          <div class="col form-group">
+            <label for="">First Name</label>
+            <input type="text" name="first_name" class="form-control" required>
+          </div>
+          <div class="col form-group">
+            <label for="">Last Name</label>
+            <input type="text" name="last_name" class="form-control" required>
+          </div>
+        </div>
+<!-- First row End -->
+        <div class="form-row">
+          <div class="col form-group">
+            <label for="">Email</label>
+            <input type="email" name="email" class="form-control" required>
+          </div>
+          <div class="col form-group">
+            <label for="">Phone Number (optional)</label>
+            <input type="text" name="phone" class="form-control" >
+          </div>
+        </div>
+<!-- Second row End -->
+        <div class="form-row">
+          <label for="">Note</label>
+          <textarea name="note" rows="2" class="form-control" ></textarea>
+        </div>
+    </form>
+  </div>
+</div> <!-- card.// -->
+
+
+</aside> <!-- col.// -->
+
+<aside class="col-lg-6">
+
+	<div class="card">
+	<div class="card-body">
+
+    <table class="table table-borderless table-shopping-cart">
+    <thead class="text-muted">
+
+    <tr class="small text-uppercase">
+      <th scope="col">Product</th>
+      <th scope="col" width="120">Quantity</th>
+    </tr>
+    </thead>
+    <tbody>
+
+    {% for favorite_item in favorite_items %}
+    <tr>
+    	<td>
+    		<figure class="itemside align-items-center">
+    			<div class="aside"><img src="{{ favorite_item.product.images.url }}" class="img-sm"></div>
+    			<figcaption class="info">
+    				<a href="{{ favorite_item.product.get_url }}" class="title text-dark">{{ favorite_item.product.product_name }}</a>
+    			</figcaption>
+    		</figure>
+    	</td>
+    	<td>
+    		<!-- col.// -->
+    					<label for="">{{ favorite_item.quantity }}</label>
+    	</td>
+
+    </tr>
+    {% endfor %}
+
+
+    </tbody>
+    </table>
+
+		<a href="./place-order.html" class="btn btn-primary btn-block">Send Details</a>
+		<a href="{% url 'store' %}" class="btn btn-light btn-block">Back to Store</a>
+	</div> <!-- card-body.// -->
+	</div> <!-- card.// -->
+
+</aside> <!-- col.// -->
+
+
+
+</div> <!-- row.// -->
+
+<!-- ============================ COMPONENT 1 END .// ================================= -->
+
+</div> <!-- container .//  -->
+</section>
+<!-- ========================= SECTION CONTENT END// ========================= -->
+{% endblock %}

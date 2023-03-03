@@ -11,6 +11,9 @@ from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.utils.encoding import force_bytes
 from django.contrib.auth.tokens import default_token_generator
 from django.core.mail import EmailMessage
+from favorite.views import _fav_id
+from favorite.models import Favorite,FavItem
+import requests
 
 def register(request):
     if request.method == 'POST':
@@ -55,9 +58,58 @@ def login(request):
         user = auth.authenticate(email=email, password=password)
 
         if user is not None:
+            try:
+                favorite = Favorite.objects.get(fav_id=_fav_id(request))
+                is_favorite_item_exists = FavItem.objects.filter(favorite=favorite).exists()
+                if is_favorite_item_exists:
+                    favorite_item = FavItem.objects.filter(favorite=favorite)
+
+# this part of the code take the favorite variation by fav id
+#to group correctly when logged or not
+                    product_variation = []
+                    for item in favorite_item:
+                        variation = item.variations.all()
+                        product_variation.append(list(variation))
+
+
+# here we are going to get the favorite items to access the user product variations
+                    favorite_item = FavItem.objects.filter(user=user)
+
+                    ex_var_list = []
+                    id = []
+                    for item in favorite_item:
+                        existing_variation = item.variations.all()
+                        ex_var_list.append(list(existing_variation))
+                        id.append(item.id)
+
+                    for pr in product_variation:
+                        if pr in ex_var_list:
+                            index = ex_var_list.index(pr)
+                            item_id = id[index]
+                            item = FavItem.objects.get(id=item_id)
+                            item.quantity += 1
+                            item.user = user
+                            item.save()
+                        else:
+                            favorite_item = FavItem.objects.filter(favorite=favorite)
+                            for item in favorite_item:
+                                item.user = user
+                                item.save()
+
+            except:
+                pass
             auth.login(request, user)
             messages.success(request, 'You are now logged in')
-            return redirect('dashboard')
+            url = request.META.get('HTTP_REFERER')
+            try:
+                query = requests.utils.urlparse(url).query
+                # next=/favorite/senddetails/
+                params = dict(x.split('=') for x in query.split('&'))
+                if 'next' in params:
+                    nextPage = params['next']
+                    return redirect(nextPage)
+            except:
+                return redirect('dashboard')
         else:
             messages.error(request, 'Invalid login credentials')
             return redirect('login')

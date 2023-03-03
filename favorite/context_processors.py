@@ -8,7 +8,10 @@ def counter(request):
     else:
         try:
             favorite = Favorite.objects.filter(fav_id=_fav_id(request))
-            favorite_items = FavItem.objects.all().filter(favorite=favorite[:1])
+            if request.user.is_authenticated:
+                favorite_items = FavItem.objects.all().filter(user=request.user)
+            else:
+                favorite_items = FavItem.objects.all().filter(favorite=favorite[:1])
             for favorite_item in favorite_items:
                 favorite_count = favorite_count + favorite_item.quantity
         except Favorite.DoesNotExist:

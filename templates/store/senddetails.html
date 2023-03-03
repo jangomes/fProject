@@ -13,7 +13,9 @@
   <div class="card-body">
     <h4 class="card-title mb-4">Details</h4>
 
-    <form action="">
+    <form action="" method="POST">
+
+			{% csrf_token %}
 
 <!-- First row start -->
         <div class="form-row">
@@ -42,7 +44,7 @@
           <label for="">Note</label>
           <textarea name="note" rows="2" class="form-control" ></textarea>
         </div>
-    </form>
+
   </div>
 </div> <!-- card.// -->
 
@@ -71,7 +73,14 @@
     			<div class="aside"><img src="{{ favorite_item.product.images.url }}" class="img-sm"></div>
     			<figcaption class="info">
     				<a href="{{ favorite_item.product.get_url }}" class="title text-dark">{{ favorite_item.product.product_name }}</a>
-    			</figcaption>
+						<p class="text-muted small">
+							{% if favorite_item.variations.all %}
+								{% for item in favorite_item.variations.all %}
+									{{ item.variation_category | capfirst }} : {{ item.variation_value | capfirst }} <br>
+								{% endfor %}
+							{% endif %}	
+						</p>
+					</figcaption>
     		</figure>
     	</td>
     	<td>
@@ -86,10 +95,11 @@
     </tbody>
     </table>
 
-		<a href="./place-order.html" class="btn btn-primary btn-block">Send Details</a>
+		<button type="submit" name="submit" class="btn btn-primary btn-block">Send Details</button>
 		<a href="{% url 'store' %}" class="btn btn-light btn-block">Back to Store</a>
 	</div> <!-- card-body.// -->
 	</div> <!-- card.// -->
+		</form>
 
 </aside> <!-- col.// -->
 

@@ -4,8 +4,8 @@ from . import views
 urlpatterns = [
     path('',views.favorite, name='favorite'),
     path('add_favorite/<int:product_id>/', views.add_favorite, name='add_favorite'),
-    path('remove_favorite/<int:product_id>/', views.remove_favorite, name='remove_favorite'),
-    path('remove_favorite_item/<int:product_id>/', views.remove_favorite_item, name='remove_favorite_item'),
+    path('remove_favorite/<int:product_id>/<int:favorite_item_id>/', views.remove_favorite, name='remove_favorite'),
+    path('remove_favorite_item/<int:product_id>/<int:favorite_item_id>/', views.remove_favorite_item, name='remove_favorite_item'),
 
-    path('senddetails', views.senddetails, name='senddetails'),
+    path('senddetails/', views.senddetails, name='senddetails'),
 ]

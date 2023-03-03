@@ -35,6 +35,13 @@
 			<div class="aside"><img src="{{ favorite_item.product.images.url }}" class="img-sm"></div>
 			<figcaption class="info">
 				<a href="{{ favorite_item.product.get_url }}" class="title text-dark">{{ favorite_item.product.product_name }}</a>
+				<p class="text-muted small">
+					{% if favorite_item.variations.all %}
+						{% for item in favorite_item.variations.all %}
+							{{ item.variation_category | capfirst }} : {{ item.variation_value | capfirst }} <br>
+						{% endfor %}
+					{% endif %}
+				</p>
 			</figcaption>
 		</figure>
 	</td>
@@ -43,18 +50,24 @@
 					<div class="col">
 						<div class="input-group input-spinner">
 							<div class="input-group-prepend">
-							<a href="{% url 'remove_favorite' favorite_item.product.id %}" class="btn btn-light" type="button" id="button-plus"> <i class="fa fa-minus"></i> </a>
+							<a href="{% url 'remove_favorite' favorite_item.product.id favorite_item.id %}" class="btn btn-light" type="button" id="button-plus"> <i class="fa fa-minus"></i> </a>
 							</div>
 							<input type="text" class="form-control"  value="{{ favorite_item.quantity }}">
 							<div class="input-group-append">
-							<a href="{% url 'add_favorite' favorite_item.product.id %}" class="btn btn-light" type="button" id="button-minus"> <i class="fa fa-plus"></i> </a>
+								<form action="{% url 'add_favorite' favorite_item.product.id %}" method="POST">
+									{% csrf_token %}
+									{% for item in favorite_item.variations.all %}
+										<input type="hidden" name="{{ item.variation_category | lower }}" value="{{ item.variation_value | capfirst }}">
+									{% endfor %}
+									<button class="btn btn-light" type="submit" id="button-minus"> <i class="fa fa-plus"></i> </button>
+								</form>
 							</div>
 						</div> <!-- input-group.// -->
 					</div> <!-- col.// -->
 	</td>
 
 	<td class="text-right">
-	<a href="{% url 'remove_favorite_item' favorite_item.product.id %}" class="btn btn-danger"> Remove</a>
+	<a href="{% url 'remove_favorite_item' favorite_item.product.id favorite_item.id %}" onclick="return confirm('Do you want delete this item?')" class="btn btn-danger"> Remove</a>
 	</td>
 </tr>
 {% endfor %}

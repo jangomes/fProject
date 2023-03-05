@@ -70,8 +70,18 @@
 
 ## References:
 
+ViewSets (no date) Django Rest Framework. Available at: https://www.django-rest-framework.org/api-guide/viewsets/ (Accessed: March 2, 2023). 
+
+Filtering (no date) Django Rest Framework. Available at: https://www.django-rest-framework.org/api-guide/filtering/ (Accessed: March 2, 2023). 
+
+The Django admin site (no date) Django Documentation. Available at: https://docs.djangoproject.com/en/4.1/ref/contrib/admin/ (Accessed: March 2, 2023). 
+
+Serializer Relations (no date) Django Rest Framework. Available at: https://www.django-rest-framework.org/api-guide/relations/ (Accessed: March 2, 2023). 
 
 Pagination (no date) Django Documentation. Available at: https://docs.djangoproject.com/en/4.1/topics/pagination/ (Accessed: March 2, 2023). 
+
 Creating forms from models (no date) Django Documentation. Available at: https://docs.djangoproject.com/en/4.1/topics/forms/modelforms/ (Accessed: March 2, 2023). 
+
 The messages framework (no date) Django Documentation. Available at: https://docs.djangoproject.com/en/4.1/ref/contrib/messages/ (Accessed: March 2, 2023). 
+
 Bootstap4 Grid system. (no date)  Available at: https://getbootstrap.com/docs/4.0/layout/grid/ (Accessed: March 5, 2023). 

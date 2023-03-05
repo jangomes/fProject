@@ -71,4 +71,7 @@
 ## References:
 
 
-
+Pagination (no date) Django Documentation. Available at: https://docs.djangoproject.com/en/4.1/topics/pagination/ (Accessed: March 2, 2023). 
+Creating forms from models (no date) Django Documentation. Available at: https://docs.djangoproject.com/en/4.1/topics/forms/modelforms/ (Accessed: March 2, 2023). 
+The messages framework (no date) Django Documentation. Available at: https://docs.djangoproject.com/en/4.1/ref/contrib/messages/ (Accessed: March 2, 2023). 
+Bootstap4 Grid system. (no date)  Available at: https://getbootstrap.com/docs/4.0/layout/grid/ (Accessed: March 5, 2023). 

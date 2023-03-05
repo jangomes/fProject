@@ -37,5 +37,7 @@ def place_detail(request):
             data.order_number = order_number
             data.save()
             return redirect('senddetails')
+        else:
+            return redirect('senddetails')
     else:
         return redirect('senddetails')

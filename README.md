@@ -21,10 +21,10 @@
 
 - [x] - Show all products
 - [x] - Search bar
-- [ ] - Categories
+- [x] - Categories
+- [x] - Store page
 
 - Product Listing:
-- [x] - Store page
 - [x] - List Product Categories
 - [x] - On clicking a Category, list Products in the Category
 - [x] - On clicking a Product, show Product description and variation
@@ -38,6 +38,7 @@
 - [x] - Delete products 
 - [x] - Empty favorite
 - [x] - Go back to store
+- [x] - Send my contact details to donor
 
 - Contact:
 - [x] - Details for contact to the person interested on the product
@@ -53,12 +54,12 @@
 
 - Dashboard:
 - [x] - Account
-- [ ] - User Profile, liked to account
-- [ ] - Edit Profile
-- [ ] - Edit Picture
-- [ ] - Change Password
-- [ ] - Donations
-- [ ] - My Request
+- [x] - User Profile, liked to account
+- [x] - Edit Profile
+- [x] - Edit Picture
+- [x] - Change Password
+- [ ] - My Donations 
+- [ ] - Donation Request
 
 
 ### Chalanges:

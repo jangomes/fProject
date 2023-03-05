@@ -69,6 +69,9 @@
 ### YouTube Video:
 
 ## References:
+CodingEntrepreneurs (2021) Python &amp; Python Virtual Environments Setup on Windows . Available at: https://www.youtube.com/watch?v=5agh7ucYKB4&amp;ab_channel=CodingEntrepreneurs (Accessed: March 5, 2023). 
+
+SQL Language (no date) PostgreSQL. Available at: https://www.postgresql.org/docs/current/sql.html (Accessed: March 2, 2023). 
 
 ViewSets (no date) Django Rest Framework. Available at: https://www.django-rest-framework.org/api-guide/viewsets/ (Accessed: March 2, 2023). 
 

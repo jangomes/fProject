@@ -13,7 +13,7 @@
   <div class="card-body">
     <h4 class="card-title mb-4">Details</h4>
 
-    <form action="" method="POST">
+    <form action="{% url 'place_detail' %}" method="POST">
 
 			{% csrf_token %}
 
@@ -78,7 +78,7 @@
 								{% for item in favorite_item.variations.all %}
 									{{ item.variation_category | capfirst }} : {{ item.variation_value | capfirst }} <br>
 								{% endfor %}
-							{% endif %}	
+							{% endif %}
 						</p>
 					</figcaption>
     		</figure>

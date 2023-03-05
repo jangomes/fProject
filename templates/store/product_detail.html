@@ -9,65 +9,74 @@ template language to check if the product is in stock and if it's already in the
 {% load static %}
 {% block content %}
 <section class="section-content padding-y bg">
-<div class="container">
+	<div class="container">
 
-<!-- ============================ COMPONENT 1 ================================= -->
-<div class="card">
-	<div class="row no-gutters">
-		<aside class="col-md-6">
-<article class="gallery-wrap">
-	<div class="img-big-wrap">
-	   <a href="#"><img src="{{ single_product.images.url }}"></a>
-	</div> <!-- img-big-wrap.// -->
+	<!-- ============================ COMPONENT 1 ================================= -->
+		<div class="card">
+			<div class="row no-gutters">
+				<aside class="col-md-6">
+					<article class="gallery-wrap">
+						<div class="img-big-wrap mainImage">
+						   <center><img src="{{ single_product.images.url }}"></center>
+						</div> <!-- img-big-wrap.// -->
 
-</article> <!-- gallery-wrap .end// -->
-		</aside>
-		<main class="col-md-6 border-left">
+					</article> <!-- gallery-wrap .end// -->
+					<ul class="thumb">
+						<li>
+							<a href="{{ single_product.images.url }}" target="mainImage"><img src="{{ single_product.images.url }}" alt="Product Image"></a>
+							{% for i in product_gallery %}
+							<a href="{{i.image.url}}" target="mainImage"><img src="{{i.image.url}}" alt="Product Image"></a>
+							{% endfor %}
+						</li>
+					</ul>
+				</aside>
+				<main class="col-md-6 border-left">
 
-			<form action="{% url 'add_favorite' single_product.id %}" method="POST">
-				{% csrf_token %}
-				<article class="content-body">
+					<form action="{% url 'add_favorite' single_product.id %}" method="POST">
+						{% csrf_token %}
+						<article class="content-body">
 
-				<h2 class="title">{{ single_product.product_name }}</h2>
+							<h2 class="title">{{ single_product.product_name }}</h2>
 
 
-				<p>{{ single_product.description }}</p>
+						<p>{{ single_product.description }}</p>
 
-				<hr>
-					<div class="row">
-						<div class="item-option-select">
-							<h6>Choose Condition</h6>
-								<select name="condition" class="form-control" required>
-										<option value="" disabled selected>Select</option>
-									  {% for i in single_product.variation_set.conditions %}
-										<option value="{{ i.variation_value }}">{{ i.variation_value }}</option>
-										{% endfor %}
-								</select>
-						</div>
-					</div> <!-- row.// -->
-					<div class="row">
-						<div class="item-option-select" class="form-control">
-							<h6>Select mood</h6>
-							<select name="mood" class="form-control" required>
-										<option value="" disabled selected>Select</option>
-									  {% for i in single_product.variation_set.moods %}
-										<option value="{{ i.variation_value | lower }}">{{ i.variation_value | capfirst }}</option>
-										{% endfor %}
-							</select>
-						</div>
-					</div> <!-- row.// -->
-					<hr>
+						<hr>
+							<div class="row">
+								<div class="item-option-select">
+									<h6>Choose Condition</h6>
+										<select name="condition" class="form-control" required>
+												<option value="" disabled selected>Select</option>
+											  {% for i in single_product.variation_set.conditions %}
+												<option value="{{ i.variation_value }}">{{ i.variation_value }}</option>
+												{% endfor %}
+										</select>
+								</div>
+							</div> <!-- row.// -->
+							<div class="row">
+								<div class="item-option-select" class="form-control">
+									<h6>Select mood</h6>
+									<select name="mood" class="form-control" required>
+												<option value="" disabled selected>Select</option>
+											  {% for i in single_product.variation_set.moods %}
+												<option value="{{ i.variation_value | lower }}">{{ i.variation_value | capfirst }}</option>
+												{% endfor %}
+									</select>
+								</div>
+							</div> <!-- row.// -->
+							<hr>
 
-					{% if single_product.quantity <= 0 %}
-					 	 <h5 class="text-danger">Sorry the product is gone already </h5>
-						 {% else %}
-							<button type="submit" class="btn  btn-primary"> <span class="text">Add to favorite</span> <i class="fas fa-solid fa-heart"></i>  </button>
-					{% endif %}
-				</article> <!-- product-info-aside .// -->
-			</form>
-		</main> <!-- col.// -->
-	</div> <!-- row.// -->
-</div> <!-- card.// -->
+							{% if single_product.quantity <= 0 %}
+							 	 <h5 class="text-danger">Sorry the product is gone already </h5>
+								 {% else %}
+									<button type="submit" class="btn  btn-primary"> <span class="text">Add to favorite</span> <i class="fas fa-solid fa-heart"></i>  </button>
+							{% endif %}
+						</article> <!-- product-info-aside .// -->
+					</form>
+				</main> <!-- col.// -->
+			</div> <!-- row.// -->
+		</div> <!-- card.// -->
+	</div>
 <!-- ============================ COMPONENT 1 END .// ================================= -->
 
 </section>

@@ -91,3 +91,10 @@ Creating forms from models (no date) Django Documentation. Available at: https:/
 The messages framework (no date) Django Documentation. Available at: https://docs.djangoproject.com/en/4.1/ref/contrib/messages/ (Accessed: March 2, 2023). 
 
 Bootstap4 Grid system. (no date)  Available at: https://getbootstrap.com/docs/4.0/layout/grid/ (Accessed: March 5, 2023). 
+
+COPYRIGHT DISCLAIMER
+This project may feature content that is copyright protected. Please, keep in mind this is an student's project and has no commercial purpose whatsoever. Having said that, if you are the owner of any content featured here and would like for it to be removed, please, contact me and I will do so promptly.
+
+Many Thanks!
+
+Janaina Gomes

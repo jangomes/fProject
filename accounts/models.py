@@ -1,9 +1,11 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 
-# Create your models here.
+# This module defines the data model for a user account system in Django.
+# Here I have the django models Account and userprofile
 
-# Here we are creating the user
+# The MyAccountManager class is a custom user manager for Account,
+# which provides methods for creating a user account and a superuser account.
 class MyAccountManager(BaseUserManager):
     def create_user(self, first_name, last_name, username, email, password=None):
         if not email:
@@ -73,7 +75,8 @@ class Account(AbstractBaseUser):
 
     def has_module_perms(self, add_label):
         return True
-
+# The UserProfile model represents additional information for a user account.
+# It has a one-to-one relationship with Account and contains a field for a profile picture.
 class UserProfile(models.Model):
     user = models.OneToOneField(Account, on_delete=models.CASCADE)
     profile_picture = models.ImageField(blank=True, upload_to='userprofile')

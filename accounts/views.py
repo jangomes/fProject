@@ -14,6 +14,7 @@ from favorite.views import _fav_id
 from favorite.models import Favorite,FavItem
 import requests
 
+# The register function handles user registration.
 def register(request):
     if request.method == 'POST':
         form = RegistrationForm(request.POST)
@@ -120,6 +121,7 @@ def login(request):
             return redirect('login')
     return render(request, 'accounts/login.html')
 
+# It logs out the user, sets a success message, and redirects them to the login page.
 @login_required(login_url = 'login')
 def logout(request):
     auth.logout(request)
@@ -142,6 +144,9 @@ def activate(request, uidb64, token):
         messages.error(request, 'Sorry, this is an invalid activation link.')
         return redirect('register')
 
+
+# The dashboard function displays the user's dashboard page.
+# It retrieves the user's UserProfile object and renders the dashboard.html template with the user's profile information.
 @login_required(login_url = 'login')
 def dashboard(request):
 
@@ -153,6 +158,10 @@ def dashboard(request):
 
     return render(request, 'accounts/dashboard.html', context)
 
+# The forgotPassword function handles password reset. When a user submits the forgot password form,
+# it retrieves the user's Account object using their email address. Then, it generates a unique token
+# for the password reset link and sends a password reset email to the user's email address with the link.
+# The user can click on the link to reset their password.
 def forgotPassword(request):
     if request.method == 'POST':
         email = request.POST['email']
@@ -212,8 +221,13 @@ def resetPassword(request):
         return render(request, 'accounts/resetPassword.html')
 
 @login_required(login_url='login')
+# with this code the user needs to be logged in to access the function,
+# and if they're not, they will be redirected to the login page ('login')
 def edit_profile(request):
     userprofile = get_object_or_404(UserProfile, user=request.user)
+    # If the method is POST the function retrieves
+    #the code creates two forms (user_form and profile_form) using the data submitted in the request.
+    #These forms are used to update the user and user profile information
     if request.method == 'POST':
         user_form = UserForm(request.POST, instance=request.user)
         profile_form = UserProfileForm(request.POST, request.FILES, instance=userprofile)
@@ -231,17 +245,25 @@ def edit_profile(request):
         'profile_form' : profile_form,
         'userprofile' : userprofile,
     }
+    # If the forms are valid, the code saves the updated information,
+    # displays a success message and redirects the user back to the edit profile page.
     return render(request, 'accounts/edit_profile.html', context)
 
+# This code is a function that allows users to change their passwords.
 @login_required(login_url='login')
+# with this code the user needs to be logged in to access the function,
+# and if they're not, they will be redirected to the login page ('login')
 def change_password(request):
+    # If the method is POST the function retrieves the current password, new password, and confirm password entered by the user
     if request.method == 'POST':
         current_password = request.POST['current_password']
         new_password = request.POST['new_password']
         confirm_password = request.POST['confirm_password']
 
+        # The function then gets the user object from the Account model using the current user's username.
         user = Account.objects.get(username__exact=request.user.username)
 
+# Here if the new password and confirm password match, it sets the new password and saves it.
         if new_password == confirm_password:
             success = user.check_password(current_password)
             if success:

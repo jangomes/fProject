@@ -4,11 +4,12 @@ from .forms import OrderForm
 import datetime
 from .models import Order
 from django.http import HttpResponse
-# Create your views here.
+
+# The view function that allows users to place an order after adding items to their favorites.
 
 def place_detail(request):
     current_user = request.user
-
+# It gets the current user and retrieves their favorite items from the FavItem model.
     favorite_items = FavItem.objects.filter(user=current_user)
     favorite_count = favorite_items.count()
     if favorite_count <= 0:
@@ -41,3 +42,4 @@ def place_detail(request):
             return redirect('senddetails')
     else:
         return redirect('senddetails')
+# If the form is not valid, or the request method is not POST, the function redirects the user to the senddetails view

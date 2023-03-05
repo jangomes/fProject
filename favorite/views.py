@@ -6,15 +6,18 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 
-
+# This function takes a request object as its argument
 def _fav_id(request):
+
+    #The function first tries to retrieve the favorite key from the session attribute of the request object.
     favorite = request.session.session_key
     if not favorite:
+        #f the key is not present, it creates a new session key using the create() method of the session attribute.
         favorite = request.session.create()
     return favorite
 
 
-
+#This is a function to add a product to a user's favorites list.
 def add_favorite(request, product_id):
     current_user = request.user
     product = Product.objects.get(id=product_id) #get product
@@ -33,7 +36,8 @@ def add_favorite(request, product_id):
                         product_variation.append(variation)
                     except:
                         pass
-
+# this function is used to add a product to a user's favorite list and to update the
+# quantity or variations of an existing favorite item if the user adds the same product again.
         is_favorite_item_exists = FavItem.objects.filter(product=product, user=current_user).exists()
         if is_favorite_item_exists:
             favorite_item = FavItem.objects.filter(product=product, user=current_user)
@@ -145,16 +149,24 @@ def add_favorite(request, product_id):
 
 def remove_favorite(request, product_id, favorite_item_id):
 
+#The get_object_or_404 function is a shortcut function provided by Django that
+# returns a 404 response if the object with the given ID is not found in the database.
     product = get_object_or_404(Product, id=product_id)
+
+    #The function then tries to get the FavItem object with the given product_id and favorite_item_id.
     try:
+        #If the user is authenticated, it gets the object with the given product_id, user, and id (favorite_item_id).
         if request.user.is_authenticated:
             favorite_item = FavItem.objects.get(product=product, user=request.user, id=favorite_item_id)
+    #If the user is not authenticated, it first gets the Favorite object associated with the session key using
+    # the _fav_id helper function, and then gets the FavItem object with the given product_id, favorite, and id (favorite_item_id).
         else:
             favorite = Favorite.objects.get(fav_id=_fav_id(request))
             favorite_item = FavItem.objects.get(product=product, favorite=favorite, id=favorite_item_id)
         if favorite_item.quantity > 1:
             favorite_item.quantity -= 1
             favorite_item.save()
+#If the FavItem object is found and its quantity is greater than 1, the quantity is decremented by 1 and the FavItem object is saved.
         else:
             favorite_item.delete()
     except:
@@ -174,6 +186,7 @@ def remove_favorite_item(request, product_id, favorite_item_id):
 def favorite(request, total=0, quantity=0, favorite_items=None):
     try:
         if request.user.is_authenticated:
+    #If the user is authenticated, it gets the favorite items associated with the user
             favorite_items = FavItem.objects.filter(user=request.user, is_active=True)
         else:
             favorite = Favorite.objects.get(fav_id=_fav_id(request))
@@ -193,17 +206,19 @@ def favorite(request, total=0, quantity=0, favorite_items=None):
 
     return render(request, 'store/favorite.html', context)
 
-
+# the user needs to be authenticated to access this view if not they will be redirected to the login page
 @login_required(login_url='login')
 def senddetails(request, total=0, quantity=0, favorite_items=None):
     try:
+        #The function first tries to retrieve the user's favorite items if they are authenticated
         if request.user.is_authenticated:
             favorite_items = FavItem.objects.filter(user=request.user, is_active=True)
         else:
+
             favorite = Favorite.objects.get(fav_id=_fav_id(request))
             favorite_items = FavItem.objects.filter(favorite=favorite, is_active=True)
         for favorite_item in favorite_items:
-            #dont need price
+            # it calculates the total quantity of items in the favorites list
             quantity += favorite_item.quantity
 
     except FavItem.DoesNotExist:

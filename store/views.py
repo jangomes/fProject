@@ -7,6 +7,7 @@ from django.db.models import Q
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 # Create your views here.
 
+# It handles requests for displaying products in the store.
 def store(request, category_slug=None):
     categories = None
     products = None

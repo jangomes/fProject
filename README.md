@@ -69,6 +69,7 @@ To carry out the creation of the site, at first I tried to develop an ecommerce 
 To develop this website I followed the presented references, tutorials and the knowledge acquired during the classes. As the main intention of the project was at first to follow a line of reasoning and then to deploy to several users, but during the creation process I had some difficulties and could not finish the project. So, not being able to make sure that all users could upload the objects to be donated, so they could only make the request. I also didn't have time to create the page where it is possible to check the requests made for the donated items. Despite not being able to finish it I learned a lot and managed to do most of the project so I am happy with the result achieved
 
 ### YouTube Video:
+https://youtu.be/Y4d79EOLjBE
 
 ## References:
 CodingEntrepreneurs (2021) Python &amp; Python Virtual Environments Setup on Windows . Available at: https://www.youtube.com/watch?v=5agh7ucYKB4&amp;ab_channel=CodingEntrepreneurs (Accessed: March 5, 2023). 

@@ -84,6 +84,10 @@ The Django admin site (no date) Django Documentation. Available at: https://docs
 
 Serializer Relations (no date) Django Rest Framework. Available at: https://www.django-rest-framework.org/api-guide/relations/ (Accessed: March 2, 2023). 
 
+Zander.(2020) Django Drf Project Ecommerce. Very Academy. Available at: https://www.udemy.com/course/django-drf-project-ecommerce/learn/lecture/34679010#overview[Accessed: January 2, 2023].
+
+R. Kumar.(2021) Python Django An Advanced Web Application. Udemy. Available at: https://www.udemy.com/course/django-ecommerce-project-based-course-python-django-web-development/learn/lecture/24759698#overview[Accessed: January 2, 2023].
+
 Pagination (no date) Django Documentation. Available at: https://docs.djangoproject.com/en/4.1/topics/pagination/ (Accessed: March 2, 2023). 
 
 Creating forms from models (no date) Django Documentation. Available at: https://docs.djangoproject.com/en/4.1/topics/forms/modelforms/ (Accessed: March 2, 2023). 
